@@ -1,0 +1,1077 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.xctest/Contents/MacOS/OpenSoundSourcePackageTests",
+      "packagePath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource",
+      "productName" : "OpenSoundSourcePackageTests"
+    }
+  ],
+  "copyCommands" : {
+    "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource_OpenSoundSource.bundle/Assets.xcassets" : {
+      "inputs" : [
+        {
+          "kind" : "directory",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Resources/Assets.xcassets"
+        }
+      ],
+      "outputs" : [
+        {
+          "kind" : "directory",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource_OpenSoundSource.bundle/Assets.xcassets"
+        }
+      ]
+    }
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.OpenSoundSource-arm64-apple-macosx-debug.module" : {
+      "executable" : "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "fileList" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/sources",
+      "importPath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/App/AppDelegate.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/App/OpenSoundSourceApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/AudioDeviceManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/AudioProcessDiscovery.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/AudioRouter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/CoreAudioHelpers.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/ProcessTapManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Models/AppSettings.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Models/AudioApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Models/AudioDevice.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/AppRowView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/Components/DevicePickerMenu.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/Components/LevelMeterView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/Components/VolumeSlider.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/DeviceSectionView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/MainPanelView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/MenuBarController.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/OnboardingView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Utilities/BundleIDResolver.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Utilities/Defaults.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/DerivedSources/resource_bundle_accessor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<OpenSoundSource-arm64-apple-macosx-debug.module-resources>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "OpenSoundSource",
+      "moduleOutputPath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/Modules/OpenSoundSource.swiftmodule",
+      "objects" : [
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AppDelegate.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/OpenSoundSourceApp.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioDeviceManager.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioProcessDiscovery.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioRouter.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/CoreAudioHelpers.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/ProcessTapManager.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AppSettings.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioApp.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioDevice.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AppRowView.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/DevicePickerMenu.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/LevelMeterView.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/VolumeSlider.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/DeviceSectionView.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/MainPanelView.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/MenuBarController.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/OnboardingView.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/BundleIDResolver.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/Defaults.swift.o",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/resource_bundle_accessor.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j15",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE",
+        "-module-cache-path",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "OpenSoundSource_main",
+        "-color-diagnostics",
+        "-swift-version",
+        "6",
+        "-I",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-L",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-plugin-path",
+        "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "opensoundsource"
+      ],
+      "outputFileMapPath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AppDelegate.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/OpenSoundSourceApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioDeviceManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioProcessDiscovery.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioRouter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/CoreAudioHelpers.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/ProcessTapManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AppSettings.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioDevice.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AppRowView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/DevicePickerMenu.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/LevelMeterView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/VolumeSlider.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/DeviceSectionView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/MainPanelView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/MenuBarController.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/OnboardingView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/BundleIDResolver.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/Defaults.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/resource_bundle_accessor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/Modules/OpenSoundSource.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/App/AppDelegate.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/App/OpenSoundSourceApp.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/AudioDeviceManager.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/AudioProcessDiscovery.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/AudioRouter.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/CoreAudioHelpers.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/ProcessTapManager.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Models/AppSettings.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Models/AudioApp.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Models/AudioDevice.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/AppRowView.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/Components/DevicePickerMenu.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/Components/LevelMeterView.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/Components/VolumeSlider.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/DeviceSectionView.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/MainPanelView.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/MenuBarController.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/OnboardingView.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Utilities/BundleIDResolver.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Utilities/Defaults.swift",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/DerivedSources/resource_bundle_accessor.swift"
+      ],
+      "tempsPath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.OpenSoundSourcePackageTests-arm64-apple-macosx-debug.module" : {
+      "executable" : "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "fileList" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build/sources",
+      "importPath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/Modules/OpenSoundSourceTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "OpenSoundSourcePackageTests",
+      "moduleOutputPath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/Modules/OpenSoundSourcePackageTests.swiftmodule",
+      "objects" : [
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j15",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build/include/OpenSoundSourcePackageTests-Swift.h",
+        "-color-diagnostics",
+        "-I",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-L",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-plugin-path",
+        "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "opensoundsource"
+      ],
+      "outputFileMapPath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/Modules/OpenSoundSourcePackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.OpenSoundSourceTests-arm64-apple-macosx-debug.module" : {
+      "executable" : "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "fileList" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourceTests.build/sources",
+      "importPath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Tests/SettingsTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourceTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "OpenSoundSourceTests",
+      "moduleOutputPath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/Modules/OpenSoundSourceTests.swiftmodule",
+      "objects" : [
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourceTests.build/SettingsTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j15",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-color-diagnostics",
+        "-swift-version",
+        "6",
+        "-I",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-L",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-plugin-path",
+        "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "opensoundsource"
+      ],
+      "outputFileMapPath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourceTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourceTests.build/SettingsTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/Modules/OpenSoundSourceTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Tests/SettingsTests.swift"
+      ],
+      "tempsPath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourceTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "OpenSoundSource" : [
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "-module-name",
+      "OpenSoundSource",
+      "-package-name",
+      "opensoundsource",
+      "-c",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/App/AppDelegate.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/App/OpenSoundSourceApp.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/AudioDeviceManager.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/AudioProcessDiscovery.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/AudioRouter.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/CoreAudioHelpers.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/ProcessTapManager.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Models/AppSettings.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Models/AudioApp.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Models/AudioDevice.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/AppRowView.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/Components/DevicePickerMenu.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/Components/LevelMeterView.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/Components/VolumeSlider.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/DeviceSectionView.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/MainPanelView.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/MenuBarController.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/OnboardingView.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Utilities/BundleIDResolver.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Utilities/Defaults.swift",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/DerivedSources/resource_bundle_accessor.swift",
+      "-I",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j15",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE",
+      "-module-cache-path",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "OpenSoundSource_main",
+      "-color-diagnostics",
+      "-swift-version",
+      "6",
+      "-I",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-L",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-plugin-path",
+      "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "opensoundsource",
+      "-driver-use-frontend-path",
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+    ],
+    "OpenSoundSourcePackageTests" : [
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "-module-name",
+      "OpenSoundSourcePackageTests",
+      "-package-name",
+      "opensoundsource",
+      "-c",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.derived/runner.swift",
+      "-I",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j15",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build/include/OpenSoundSourcePackageTests-Swift.h",
+      "-color-diagnostics",
+      "-I",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-L",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-plugin-path",
+      "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "opensoundsource",
+      "-driver-use-frontend-path",
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+    ],
+    "OpenSoundSourceTests" : [
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "-module-name",
+      "OpenSoundSourceTests",
+      "-package-name",
+      "opensoundsource",
+      "-c",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Tests/SettingsTests.swift",
+      "-I",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j15",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-color-diagnostics",
+      "-swift-version",
+      "6",
+      "-I",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-L",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-plugin-path",
+      "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "opensoundsource",
+      "-driver-use-frontend-path",
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "OpenSoundSource" : [
+
+    ],
+    "OpenSoundSourcePackageTests" : [
+      "OpenSoundSourceTests",
+      "OpenSoundSource"
+    ],
+    "OpenSoundSourceTests" : [
+      "OpenSoundSource"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+    "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.derived/runner.swift" : {
+      "inputs" : [
+
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.derived/runner.swift"
+        }
+      ]
+    }
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource-entitlement.plist" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<entitlement-plist>"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<com.apple.security.get-task-allow>"
+        }
+      ],
+      "outputFilePath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource-entitlement.plist"
+    },
+    "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/App/AppDelegate.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/App/OpenSoundSourceApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/AudioDeviceManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/AudioProcessDiscovery.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/AudioRouter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/CoreAudioHelpers.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/AudioEngine/ProcessTapManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Models/AppSettings.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Models/AudioApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Models/AudioDevice.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/AppRowView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/Components/DevicePickerMenu.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/Components/LevelMeterView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/Components/VolumeSlider.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/DeviceSectionView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/MainPanelView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/MenuBarController.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/UI/OnboardingView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Utilities/BundleIDResolver.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Sources/Utilities/Defaults.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/DerivedSources/resource_bundle_accessor.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/sources"
+    },
+    "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AppDelegate.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AppRowView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AppSettings.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioDevice.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioDeviceManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioProcessDiscovery.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioRouter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/BundleIDResolver.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/CoreAudioHelpers.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/Defaults.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/DevicePickerMenu.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/DeviceSectionView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/LevelMeterView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/MainPanelView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/MenuBarController.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/OnboardingView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/OpenSoundSourceApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/ProcessTapManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/VolumeSlider.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/resource_bundle_accessor.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.product/Objects.LinkFileList"
+    },
+    "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build/sources"
+    },
+    "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AppDelegate.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AppRowView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AppSettings.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioDevice.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioDeviceManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioProcessDiscovery.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/AudioRouter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/BundleIDResolver.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/CoreAudioHelpers.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/Defaults.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/DevicePickerMenu.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/DeviceSectionView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/LevelMeterView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/MainPanelView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/MenuBarController.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/OnboardingView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/OpenSoundSourceApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/ProcessTapManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/VolumeSlider.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSource.build/resource_bundle_accessor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourceTests.build/SettingsTests.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.product/Objects.LinkFileList"
+    },
+    "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourceTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/Tests/SettingsTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourceTests.build/sources"
+    },
+    "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+    }
+  }
+}

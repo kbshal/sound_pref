@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build/primary.swiftdeps"
+  },
+  "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.derived/runner.swift": {
+    "dependencies": "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build/runner.d",
+    "object": "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build/runner.swift.o",
+    "swiftmodule": "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build/runner~partial.swiftmodule",
+    "swift-dependencies": "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build/runner.swiftdeps",
+    "diagnostics": "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/OpenSoundSource/.build/arm64-apple-macosx/debug/OpenSoundSourcePackageTests.build/runner.dia"
+  }
+}
