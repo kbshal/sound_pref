@@ -35,21 +35,30 @@ When you adjust an app's volume or route it to a different output:
 3. The processed audio is routed to your **chosen output device**
 4. The original audio on the default device is **muted** (for routing) to prevent double-playback
 
-## Building
+## Building & Running
+
+Because the app requires specific permissions (Core Audio process tap) that need a properly signed `.app` bundle, simply using `swift run` often fails with macOS Sandbox errors.
+
+Instead, use the included build script to compile, sign, and launch the app automatically:
 
 ```bash
-cd SoundPref
-swift build
+./run_app.sh
 ```
 
-To run:
+## Making a DMG for Distribution
+
+If you want to package the app into a `.dmg` file to share with others, use the provided DMG script:
+
 ```bash
-swift run SoundPref
+./build_dmg.sh
 ```
 
-Or open in Xcode and build/run from there.
+This will create a `SoundPref.dmg` file in your project directory. 
 
-> **Note:** The Core Audio capture permission prompt requires a properly code-signed binary. During development, sign with your Apple Developer account for the permission dialog to appear.
+### How to Install
+1. Double-click `SoundPref.dmg` to open it.
+2. Drag and drop the `SoundPref.app` icon into the `Applications` folder shortcut.
+3. Open `Applications` and launch `SoundPref`.
 
 ## Privacy
 
