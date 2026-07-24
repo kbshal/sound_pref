@@ -4,19 +4,19 @@
 import PackageDescription
 
 let package = Package(
-    name: "OpenSoundSource",
+    name: "SoundPref",
     platforms: [
-        .macOS(.v14)
+        .macOS("14.2")
     ],
     products: [
         .executable(
-            name: "OpenSoundSource",
-            targets: ["OpenSoundSource"]
+            name: "SoundPref",
+            targets: ["SoundPref"]
         )
     ],
     targets: [
         .executableTarget(
-            name: "OpenSoundSource",
+            name: "SoundPref",
             dependencies: [],
             path: "Sources",
             resources: [
@@ -31,8 +31,8 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "OpenSoundSourceTests",
-            dependencies: ["OpenSoundSource"],
+            name: "SoundPrefTests",
+            dependencies: ["SoundPref"],
             path: "Tests"
         )
     ]

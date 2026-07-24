@@ -1,71 +1,66 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright © 2026 OpenSoundSource Contributors
+// Copyright © 2026 SoundPref Contributors
 
 import SwiftUI
 
-/// Custom volume slider with a detent at 100% and boost zone above.
-///
-/// The slider covers 0–200% (0.0–2.0). The 100% mark has a subtle
-/// visual detent so the user can easily find "normal" volume.
-/// Values above 100% are shown in an accent color to indicate boost.
+enum VolumeSliderStyle {
+    case accent
+    case gray
+}
+
+/// Custom sleek volume slider that matches the SoundPref HTML mockup.
 struct VolumeSlider: View {
     @Binding var value: Float
+    var style: VolumeSliderStyle = .accent
     var isMuted: Bool = false
     var onEditingChanged: ((Bool) -> Void)? = nil
 
-    /// The height of the slider track.
+    @State private var isHovered: Bool = false
+    
     private let trackHeight: CGFloat = 4
-    /// The diameter of the thumb.
-    private let thumbDiameter: CGFloat = 14
+    private let thumbDiameter: CGFloat = 12
+    private let thumbHoverScale: CGFloat = 1.3
 
     var body: some View {
         GeometryReader { geometry in
             let width = geometry.size.width
-            let normalizedValue = CGFloat(value / 2.0) // 0.0–1.0 for 0–200%
+            let normalizedValue = CGFloat(max(0.0, min(1.0, value)))
             let thumbX = normalizedValue * width
-            let detentX = width * 0.5 // 100% mark
 
             ZStack(alignment: .leading) {
                 // Track background
                 Capsule()
-                    .fill(Color.white.opacity(0.1))
+                    .fill(Color.white.opacity(0.15))
                     .frame(height: trackHeight)
 
                 // Filled track
                 Capsule()
-                    .fill(fillGradient(boostActive: value > 1.0))
+                    .fill(fillColor)
                     .frame(width: max(0, thumbX), height: trackHeight)
                     .opacity(isMuted ? 0.3 : 1.0)
 
-                // 100% detent marker
-                Rectangle()
-                    .fill(Color.white.opacity(0.3))
-                    .frame(width: 1, height: trackHeight + 6)
-                    .position(x: detentX, y: geometry.size.height / 2)
-
                 // Thumb
                 Circle()
-                    .fill(isMuted ? Color.gray : Color.white)
+                    .fill(Color.white)
                     .frame(width: thumbDiameter, height: thumbDiameter)
-                    .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
+                    .shadow(color: .black.opacity(0.4), radius: 2, y: 1)
+                    .scaleEffect(isHovered ? thumbHoverScale : 1.0)
+                    .animation(.spring(response: 0.2, dampingFraction: 0.7), value: isHovered)
                     .position(
                         x: max(thumbDiameter / 2, min(width - thumbDiameter / 2, thumbX)),
                         y: geometry.size.height / 2
                     )
             }
             .contentShape(Rectangle())
+            .onHover { hovering in
+                isHovered = hovering
+            }
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { drag in
-                        let newValue = Float(drag.location.x / width) * 2.0
-                        let clamped = max(0.0, min(2.0, newValue))
-
-                        // Snap to 100% detent within a small range
-                        if abs(clamped - 1.0) < 0.04 {
-                            value = 1.0
-                        } else {
-                            value = clamped
-                        }
+                        let newValue = Float(drag.location.x / width)
+                        let clamped = max(0.0, min(1.0, newValue))
+                        value = clamped
 
                         onEditingChanged?(true)
                     }
@@ -74,23 +69,14 @@ struct VolumeSlider: View {
                     }
             )
         }
-        .frame(height: thumbDiameter + 4)
+        .frame(height: thumbDiameter * thumbHoverScale) // ensure room for hover scale
     }
 
-    /// Gradient for the filled portion — normal blue up to 100%, orange/amber above.
-    private func fillGradient(boostActive: Bool) -> LinearGradient {
-        if boostActive {
-            return LinearGradient(
-                colors: [.accentColor, .accentColor, .orange],
-                startPoint: .leading,
-                endPoint: .trailing
-            )
+    private var fillColor: Color {
+        if style == .accent {
+            return .accentColor
         } else {
-            return LinearGradient(
-                colors: [.accentColor, .accentColor],
-                startPoint: .leading,
-                endPoint: .trailing
-            )
+            return Color.white.opacity(0.8)
         }
     }
 }
@@ -104,24 +90,12 @@ struct VolumeLabel: View {
     var body: some View {
         Text(volumeText)
             .font(.system(size: 10, weight: .medium, design: .monospaced))
-            .foregroundStyle(value > 1.0 ? Color.orange : Color.secondary)
-            .frame(width: 36, alignment: .trailing)
+            .foregroundStyle(Color.secondary)
+            .frame(width: 32, alignment: .trailing)
     }
 
     private var volumeText: String {
         let percentage = Int(value * 100)
         return "\(percentage)%"
     }
-}
-
-#Preview {
-    VStack(spacing: 20) {
-        VolumeSlider(value: .constant(0.5))
-        VolumeSlider(value: .constant(1.0))
-        VolumeSlider(value: .constant(1.5))
-        VolumeSlider(value: .constant(1.0), isMuted: true)
-    }
-    .padding()
-    .frame(width: 200)
-    .background(.black)
 }

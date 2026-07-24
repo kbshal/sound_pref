@@ -1,16 +1,15 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright © 2026 OpenSoundSource Contributors
+// Copyright © 2026 SoundPref Contributors
 
 import SwiftUI
 
 /// A single row in the app list representing one audio-producing application.
-///
-/// Contains: app icon, name, level meter, volume slider, mute button,
-/// output device picker, and favorite toggle.
+/// Matches the `.app-row` HTML mockup styling.
 struct AppRowView: View {
     @Bindable var app: AudioApp
     let outputDevices: [AudioDevice]
     let defaultOutputDevice: AudioDevice?
+    var showLevelMeter: Bool = true // We can keep this if they enable it in settings
 
     var onVolumeChanged: ((Float) -> Void)? = nil
     var onMuteToggled: ((Bool) -> Void)? = nil
@@ -18,41 +17,84 @@ struct AppRowView: View {
     var onFavoriteToggled: (() -> Void)? = nil
 
     var body: some View {
-        VStack(spacing: 4) {
-            // Top row: icon, name, controls
-            HStack(spacing: 8) {
-                // App icon
+        VStack(alignment: .leading, spacing: 8) {
+            // Top section: Icon, Name, Slider
+            HStack(spacing: 12) {
+                // App Icon
                 appIcon
-                    .frame(width: 28, height: 28)
+                    .frame(width: 32, height: 32)
+                    .background(Color.white.opacity(0.1))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .shadow(color: .black.opacity(0.2), radius: 3, y: 1)
 
-                // App name
-                VStack(alignment: .leading, spacing: 1) {
-                    Text(app.name)
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(app.isRunningOutput ? .primary : .secondary)
-                        .lineLimit(1)
+                // App Info & Controls
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text(app.name)
+                            .font(.system(size: 13, weight: .medium))
+                            .foregroundStyle(app.isRunningOutput ? .primary : .secondary)
+                            .lineLimit(1)
+                        
+                        if app.isRunningOutput {
+                            EqualizerBarsView(level: app.peakLevel, isPlaying: !app.isMuted)
+                                .padding(.leading, 4)
+                        } else {
+                            Text("Not playing")
+                                .font(.system(size: 10))
+                                .foregroundStyle(.tertiary)
+                        }
 
-                    if !app.isRunningOutput {
-                        Text("Not playing")
-                            .font(.system(size: 9))
-                            .foregroundStyle(.tertiary)
+                        Spacer()
+
+                        Button {
+                            onFavoriteToggled?()
+                        } label: {
+                            Image(systemName: app.isFavorite ? "star.fill" : "star")
+                                .font(.system(size: 11))
+                                .foregroundStyle(app.isFavorite ? .yellow : .secondary.opacity(0.5))
+                        }
+                        .buttonStyle(.plain)
+                    }
+
+                    // Slider row
+                    HStack(spacing: 8) {
+                        Button {
+                            let newMuted = !app.isMuted
+                            app.isMuted = newMuted
+                            onMuteToggled?(newMuted)
+                        } label: {
+                            Image(systemName: muteIcon)
+                                .font(.system(size: 12))
+                                .foregroundStyle(app.isMuted ? .red : .secondary)
+                                .frame(width: 16)
+                        }
+                        .buttonStyle(.plain)
+
+                        VolumeSlider(
+                            value: Binding(
+                                get: { app.volume },
+                                set: { newValue in
+                                    app.volume = newValue
+                                    onVolumeChanged?(newValue)
+                                }
+                            ),
+                            style: .accent, // HTML apps use the accent slider
+                            isMuted: app.isMuted,
+                            onEditingChanged: { editing in
+                                if !editing {
+                                    onVolumeChanged?(app.volume)
+                                }
+                            }
+                        )
                     }
                 }
+            }
 
+            // Bottom section: Output Device Picker (Indented)
+            HStack {
                 Spacer()
+                    .frame(width: 44) // 32 (icon) + 12 (spacing)
 
-                // Favorite button
-                Button {
-                    onFavoriteToggled?()
-                } label: {
-                    Image(systemName: app.isFavorite ? "star.fill" : "star")
-                        .font(.system(size: 10))
-                        .foregroundStyle(app.isFavorite ? .yellow : .secondary.opacity(0.5))
-                }
-                .buttonStyle(.plain)
-                .help(app.isFavorite ? "Remove from favorites" : "Add to favorites")
-
-                // Output device picker
                 DevicePickerMenu(
                     selectedDeviceUID: Binding(
                         get: { app.outputDeviceUID },
@@ -62,61 +104,14 @@ struct AppRowView: View {
                         }
                     ),
                     devices: outputDevices,
-                    defaultDevice: defaultOutputDevice,
-                    onDeviceChanged: onOutputDeviceChanged
+                    defaultDevice: defaultOutputDevice
                 )
-            }
-
-            // Level meter
-            LevelMeterView(
-                level: app.peakLevel,
-                isActive: app.isRunningOutput && !app.isMuted
-            )
-            .padding(.horizontal, 36)
-
-            // Bottom row: mute button, volume slider, volume label
-            HStack(spacing: 6) {
-                // Mute button
-                Button {
-                    let newMuted = !app.isMuted
-                    app.isMuted = newMuted
-                    onMuteToggled?(newMuted)
-                } label: {
-                    Image(systemName: muteIcon)
-                        .font(.system(size: 12))
-                        .foregroundStyle(app.isMuted ? .red : .secondary)
-                        .frame(width: 20)
-                }
-                .buttonStyle(.plain)
-                .help(app.isMuted ? "Unmute" : "Mute")
-
-                // Volume slider
-                VolumeSlider(
-                    value: Binding(
-                        get: { app.volume },
-                        set: { newValue in
-                            app.volume = newValue
-                            onVolumeChanged?(newValue)
-                        }
-                    ),
-                    isMuted: app.isMuted,
-                    onEditingChanged: { editing in
-                        if !editing {
-                            onVolumeChanged?(app.volume)
-                        }
-                    }
-                )
-
-                // Volume percentage label
-                VolumeLabel(value: app.volume)
+                
+                Spacer()
             }
         }
-        .padding(.vertical, 6)
-        .padding(.horizontal, 8)
-        .background(
-            RoundedRectangle(cornerRadius: 6)
-                .fill(Color.white.opacity(0.03))
-        )
+        .padding(.vertical, 8)
+        .padding(.horizontal, 4)
         .opacity(app.isRunningOutput ? 1.0 : 0.6)
     }
 
@@ -128,7 +123,6 @@ struct AppRowView: View {
             Image(nsImage: nsImage)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .clipShape(RoundedRectangle(cornerRadius: 6))
         } else {
             Image(systemName: "app")
                 .font(.system(size: 20))

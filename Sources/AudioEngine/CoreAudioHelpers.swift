@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright © 2026 OpenSoundSource Contributors
+// Copyright © 2026 SoundPref Contributors
 
 import CoreAudio
 import AudioToolbox
@@ -98,16 +98,20 @@ func getAudioObjectPropertyArray<T>(
     guard dataSize > 0 else { return [] }
 
     let count = Int(dataSize) / MemoryLayout<T>.size
-    var array = [T](repeating: unsafeBitCast(0, to: T.self), count: count)
-
-    status = AudioObjectGetPropertyData(objectID, &addr, 0, nil, &dataSize, &array)
-    guard status == noErr else {
-        throw CoreAudioError.getPropertyDataFailed(status)
+    let array = try Array<T>(unsafeUninitializedCapacity: count) { buffer, initializedCount in
+        var actualDataSize = dataSize
+        guard let baseAddress = buffer.baseAddress else {
+            initializedCount = 0
+            return
+        }
+        let status = AudioObjectGetPropertyData(objectID, &addr, 0, nil, &actualDataSize, baseAddress)
+        guard status == noErr else {
+            throw CoreAudioError.getPropertyDataFailed(status)
+        }
+        initializedCount = Int(actualDataSize) / MemoryLayout<T>.size
     }
-
-    // Recalculate count in case the size changed between calls
-    let actualCount = Int(dataSize) / MemoryLayout<T>.size
-    return Array(array.prefix(actualCount))
+    
+    return array
 }
 
 /// Get a Core Audio property that returns a CFString.

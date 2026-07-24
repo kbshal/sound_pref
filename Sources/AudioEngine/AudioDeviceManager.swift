@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright © 2026 OpenSoundSource Contributors
+// Copyright © 2026 SoundPref Contributors
 
 import CoreAudio
 import AudioToolbox
@@ -26,7 +26,9 @@ final class AudioDeviceManager {
     private(set) var defaultInputDevice: AudioDevice?
 
     /// Property listener tokens (retained to keep listeners alive).
-    private var listenerTokens: [PropertyListenerToken] = []
+    /// `nonisolated(unsafe)` so `deinit` (which is nonisolated) can read it;
+    /// all other access happens on the main actor.
+    private nonisolated(unsafe) var listenerTokens: [PropertyListenerToken] = []
 
     // MARK: - Initialization
 
@@ -66,7 +68,7 @@ final class AudioDeviceManager {
             guard let device = buildAudioDevice(id: deviceID) else { continue }
 
             // Skip aggregate devices we created ourselves
-            if device.uid.hasPrefix("com.opensoundsource.") { continue }
+            if device.uid.hasPrefix("com.soundpref.") { continue }
 
             if device.hasOutput {
                 outputs.append(device)

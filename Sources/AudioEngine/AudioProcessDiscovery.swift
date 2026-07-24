@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright © 2026 OpenSoundSource Contributors
+// Copyright © 2026 SoundPref Contributors
 
 import CoreAudio
 import AudioToolbox
@@ -26,7 +26,7 @@ final class AudioProcessDiscovery {
 
     /// Bundle IDs to exclude from the list (our own app, system daemons, etc.).
     private let excludedBundleIDs: Set<String> = [
-        "com.opensoundsource.app",
+        "com.soundpref.app",
         "com.apple.audio.SandboxHelper",
         "com.apple.WebKit.GPU",
     ]
@@ -61,6 +61,10 @@ final class AudioProcessDiscovery {
 
             // Skip excluded apps
             if excludedBundleIDs.contains(app.bundleID) { continue }
+
+            // Never include our own process — tapping ourselves would mute
+            // the audio we re-render for other apps (self-tap feedback → silence).
+            if app.pid == ProcessInfo.processInfo.processIdentifier { continue }
 
             // Only include apps currently running output
             if app.isRunningOutput {

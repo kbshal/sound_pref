@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright © 2026 OpenSoundSource Contributors
+// Copyright © 2026 SoundPref Contributors
 
 import Foundation
+import Observation
 
 /// Per-application audio settings, persisted across app relaunches.
 ///
@@ -41,13 +42,14 @@ struct GlobalSettings: Codable, Sendable {
 /// Thread-safe via `@MainActor` — all UI-driven settings changes
 /// originate from the main thread anyway.
 @MainActor
+@Observable
 final class SettingsStore {
 
     static let shared = SettingsStore()
 
     private let defaults = UserDefaults.standard
-    private let perAppKey = "com.opensoundsource.perAppSettings"
-    private let globalKey = "com.opensoundsource.globalSettings"
+    private let perAppKey = "com.soundpref.perAppSettings"
+    private let globalKey = "com.soundpref.globalSettings"
 
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()

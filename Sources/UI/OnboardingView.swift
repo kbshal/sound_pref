@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright © 2026 OpenSoundSource Contributors
+// Copyright © 2026 SoundPref Contributors
 
 import SwiftUI
 
@@ -75,10 +75,10 @@ struct OnboardingView: View {
 
             Image(systemName: "waveform.circle.fill")
                 .font(.system(size: 48))
-                .foregroundStyle(.accentColor)
+                .foregroundStyle(Color.accentColor)
                 .symbolEffect(.pulse, isActive: true)
 
-            Text("Welcome to OpenSoundSource")
+            Text("Welcome to SoundPref")
                 .font(.system(size: 20, weight: .bold))
 
             Text("Control every app's audio right from your menu bar.\nAdjust volume, mute, and route apps to different speakers — all for free.")
@@ -102,7 +102,7 @@ struct OnboardingView: View {
             Text("Audio Recording Permission")
                 .font(.system(size: 18, weight: .bold))
 
-            Text("OpenSoundSource needs permission to capture audio from other apps.\n\nWhen prompted, click **Allow** to enable per-app volume and routing.")
+            Text("SoundPref needs permission to capture audio from other apps.\n\nWhen prompted, click **Allow** to enable per-app volume and routing.")
                 .font(.system(size: 13))
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
@@ -136,7 +136,7 @@ struct OnboardingView: View {
             Text("About the Purple Dot")
                 .font(.system(size: 18, weight: .bold))
 
-            Text("You'll see a purple dot in your menu bar when OpenSoundSource is active.\n\nThis is Apple's indicator that an app is accessing system audio. It's normal and expected — it appears for all audio capture apps.")
+            Text("You'll see a purple dot in your menu bar when SoundPref is active.\n\nThis is Apple's indicator that an app is accessing system audio. It's normal and expected — it appears for all audio capture apps.")
                 .font(.system(size: 13))
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)

@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright © 2026 OpenSoundSource Contributors
+// Copyright © 2026 SoundPref Contributors
 
 import CoreAudio
 import Foundation
 import Observation
 import os.log
 
-private let logger = Logger(subsystem: "com.opensoundsource", category: "AudioRouter")
+private let logger = Logger(subsystem: "com.soundpref", category: "AudioRouter")
 
 /// Orchestrates per-app audio routing by managing ProcessTapManagers.
 ///
@@ -47,9 +47,8 @@ final class AudioRouter {
         self.deviceManager = deviceManager
     }
 
-    deinit {
-        stopAllTaps()
-    }
+    // Note: no explicit deinit needed — releasing `activeTaps` deallocates each
+    // ProcessTapManager, whose own deinit calls stop() to tear down its tap.
 
     // MARK: - Per-App Control
 
@@ -65,6 +64,8 @@ final class AudioRouter {
         // Apply to active tap
         if let tap = activeTaps[app.bundleID] {
             tap.setGain(volume)
+        } else {
+            ensureTap(for: app)
         }
     }
 
@@ -80,6 +81,8 @@ final class AudioRouter {
         // Apply to active tap
         if let tap = activeTaps[app.bundleID] {
             tap.setMuted(muted)
+        } else {
+            ensureTap(for: app)
         }
     }
 
@@ -102,6 +105,8 @@ final class AudioRouter {
                 removeTap(for: app)
                 ensureTap(for: app)
             }
+        } else {
+            ensureTap(for: app)
         }
     }
 
@@ -120,6 +125,9 @@ final class AudioRouter {
     func ensureTap(for app: AudioApp) {
         guard isEngineEnabled else { return }
         guard app.isRunningOutput else { return }
+        // Never tap our own process: we render other apps' redirected audio,
+        // so a self-tap would mute everything we play (feedback → silence).
+        guard app.pid != ProcessInfo.processInfo.processIdentifier else { return }
         guard activeTaps[app.bundleID] == nil else { return }
         guard app.processObjectID != AudioObjectID(kAudioObjectUnknown) else { return }
 

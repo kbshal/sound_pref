@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright © 2026 OpenSoundSource Contributors
+// Copyright © 2026 SoundPref Contributors
 
-import AVFAudio
 import AudioToolbox
 import CoreAudio
 import Foundation
@@ -11,11 +10,14 @@ import Foundation
 ///
 /// Each `ProcessTapManager` handles the lifecycle of:
 /// 1. A `CATapDescription` + `AudioHardwareCreateProcessTap` for capture
-/// 2. An aggregate device that exposes the tap as an input stream
-/// 3. An `AVAudioEngine` graph: tap input → gain → output device
+/// 2. An aggregate device containing the tap (input) and the target
+///    physical device (output), with drift compensation on the tap
+/// 3. An IOProc on the aggregate that copies tap input → device output
+///    with gain applied
 ///
-/// The tap's mute behavior controls whether the original audio is suppressed
-/// on the source device (redirection mode) or left playing (monitor mode).
+/// Running an IOProc directly on the aggregate keeps capture and playback
+/// on one device/clock, which is required for reliable routing — especially
+/// to Bluetooth devices that run on their own clock domain.
 @available(macOS 14.2, *)
 final class ProcessTapManager: @unchecked Sendable {
 
@@ -33,22 +35,20 @@ final class ProcessTapManager: @unchecked Sendable {
     /// The aggregate device's AudioObjectID.
     private(set) var aggregateDeviceID: AudioObjectID = AudioObjectID(kAudioObjectUnknown)
 
-    /// The AVAudioEngine processing graph.
-    private var engine: AVAudioEngine?
-
-    /// Gain node for volume control.
-    private var gainNode: AVAudioMixerNode?
+    /// The IOProc that moves audio from the tap to the output device.
+    private var ioProcID: AudioDeviceIOProcID?
 
     /// Whether the tap is currently active.
     private(set) var isActive: Bool = false
 
-    /// Current gain value (0.0–2.0).
+    /// Current gain value (0.0–2.0). Read from the realtime IO thread.
     private var currentGain: Float = 1.0
 
-    /// Whether audio is muted.
+    /// Whether audio is muted. Read from the realtime IO thread.
     private var isMuted: Bool = false
 
     /// Callback for peak level updates (for the UI meter).
+    /// Called from the realtime IO thread.
     var onPeakLevelUpdate: ((Float) -> Void)?
 
     /// The target output device UID (nil = system default).
@@ -87,22 +87,19 @@ final class ProcessTapManager: @unchecked Sendable {
 
     /// Start capturing audio from the target process.
     ///
-    /// This creates the tap, builds the aggregate device, sets up the
-    /// AVAudioEngine graph, and starts playback.
+    /// This creates the tap, builds the aggregate device, and starts
+    /// the IOProc that routes audio to the output device.
     func start() throws {
         guard !isActive else { return }
 
         // Step 1: Create the process tap
         try createProcessTap()
 
-        // Step 2: Create aggregate device with the tap
+        // Step 2: Create aggregate device with the tap + output device
         try createAggregateDevice()
 
-        // Step 3: Set up AVAudioEngine for processing + output
-        try setupAudioEngine()
-
-        // Step 4: Start the engine
-        try engine?.start()
+        // Step 3: Start the IOProc that copies tap audio to the output
+        try startIOProc()
 
         isActive = true
     }
@@ -111,9 +108,12 @@ final class ProcessTapManager: @unchecked Sendable {
     func stop() {
         guard isActive else { return }
 
-        engine?.stop()
-        engine = nil
-        gainNode = nil
+        // Stop and destroy the IOProc
+        if let procID = ioProcID, aggregateDeviceID != AudioObjectID(kAudioObjectUnknown) {
+            AudioDeviceStop(aggregateDeviceID, procID)
+            AudioDeviceDestroyIOProcID(aggregateDeviceID, procID)
+        }
+        ioProcID = nil
 
         // Destroy aggregate device
         if aggregateDeviceID != AudioObjectID(kAudioObjectUnknown) {
@@ -135,17 +135,15 @@ final class ProcessTapManager: @unchecked Sendable {
     /// Set the gain/volume for this tap (0.0–2.0).
     func setGain(_ gain: Float) {
         currentGain = max(0.0, min(2.0, gain))
-        gainNode?.outputVolume = isMuted ? 0.0 : currentGain
     }
 
     /// Set the mute state for this tap.
     func setMuted(_ muted: Bool) {
         isMuted = muted
-        gainNode?.outputVolume = muted ? 0.0 : currentGain
     }
 
     /// Change the output device for this tap.
-    /// Requires restarting the engine with the new device.
+    /// Requires rebuilding the aggregate with the new device.
     func setOutputDevice(uid: String?) throws {
         let wasActive = isActive
         if wasActive { stop() }
@@ -158,15 +156,11 @@ final class ProcessTapManager: @unchecked Sendable {
     /// Create a Core Audio process tap targeting our process.
     private func createProcessTap() throws {
         let tapDescription = CATapDescription(stereoMixdownOfProcesses: [processObjectID])
-        tapDescription.name = "com.opensoundsource.tap.\(bundleID)"
+        tapDescription.name = "com.soundpref.tap.\(bundleID)"
         tapDescription.isPrivate = true
 
-        // Set mute behavior
-        if muteSource {
-            tapDescription.muteBehavior = .mutedWhenTapped
-        } else {
-            tapDescription.muteBehavior = .unmuted
-        }
+        // Always mute the source process so that we don't get double audio when tapped!
+        tapDescription.muteBehavior = .mutedWhenTapped
 
         var newTapID = AudioObjectID(kAudioObjectUnknown)
         let status = AudioHardwareCreateProcessTap(tapDescription, &newTapID)
@@ -177,30 +171,37 @@ final class ProcessTapManager: @unchecked Sendable {
         tapID = newTapID
     }
 
-    /// Create an aggregate device that includes our tap as an input source.
+    /// Create an aggregate device with the target output device as its
+    /// sub-device and the tap in its tap list. The tap's audio then arrives
+    /// as the aggregate's input, and the aggregate's output goes to the
+    /// physical device.
     private func createAggregateDevice() throws {
         // Get the tap's UID
         let tapUID = try getTapUID(tapID: tapID)
 
-        let aggregateUID = "com.opensoundsource.aggregate.\(bundleID).\(UUID().uuidString.prefix(8))"
+        // The aggregate always needs a real output device. Use the user's
+        // chosen device, or fall back to the current system default (for
+        // volume/mute-only taps with no redirection).
+        let outputUID = try targetOutputDeviceUID ?? defaultOutputDeviceUID()
 
-        // Build the aggregate device description
+        let aggregateUID = "com.soundpref.aggregate.\(bundleID).\(UUID().uuidString.prefix(8))"
+
         let tapEntry: [String: Any] = [
-            kAggregateDeviceTapUIDKey as String: tapUID
+            kAggregateDeviceTapUIDKey as String: tapUID,
+            "drift": 1 // Enable drift compensation (resampling) to match the master clock
         ]
 
-        var description: [String: Any] = [
+        let description: [String: Any] = [
             kAggregateDeviceUIDKey as String: aggregateUID,
             kAggregateDeviceNameKey as String: "OSS Tap: \(bundleID)",
             kAggregateDeviceIsPrivateKey as String: true,
             kAggregateDeviceIsStackedKey as String: false,
             kAggregateDeviceTapListKey as String: [tapEntry],
+            "subdevices": [
+                ["uid": outputUID]
+            ],
+            kAggregateDeviceMainSubDeviceKey as String: outputUID,
         ]
-
-        // If we have a specific output device, add it as a sub-device
-        if let outputUID = targetOutputDeviceUID {
-            description[kAggregateDeviceMainSubDeviceKey as String] = outputUID
-        }
 
         var newAggregateID = AudioObjectID(kAudioObjectUnknown)
         let status = AudioHardwareCreateAggregateDevice(
@@ -217,130 +218,91 @@ final class ProcessTapManager: @unchecked Sendable {
         aggregateDeviceID = newAggregateID
     }
 
-    // MARK: - Private: Audio Engine Setup
+    // MARK: - Private: IO
 
-    /// Set up the AVAudioEngine graph for processing tapped audio.
-    private func setupAudioEngine() throws {
-        let newEngine = AVAudioEngine()
+    /// Install and start an IOProc on the aggregate device.
+    ///
+    /// The IOProc receives the tap's audio as input buffers and writes
+    /// them (scaled by gain) into the output buffers, which the aggregate
+    /// delivers to the physical output device.
+    private func startIOProc() throws {
+        var procID: AudioDeviceIOProcID?
+        let status = AudioDeviceCreateIOProcIDWithBlock(&procID, aggregateDeviceID, nil) {
+            [weak self] _, inInputData, _, outOutputData, _ in
 
-        // Configure the engine to use our aggregate device as input
-        // The aggregate device's input streams come from the tap
-        do {
-            try newEngine.inputNode.setVoiceProcessingEnabled(false)
-        } catch {
-            // Voice processing may not be relevant, continue
-        }
+            // If we're gone, output silence.
+            let gain: Float
+            let levelCallback: ((Float) -> Void)?
+            if let self {
+                gain = self.isMuted ? 0.0 : self.currentGain
+                levelCallback = self.onPeakLevelUpdate
+            } else {
+                gain = 0.0
+                levelCallback = nil
+            }
 
-        // Set the aggregate device as the input device for the engine
-        setEngineDevice(newEngine.inputNode, deviceID: aggregateDeviceID, isInput: true)
+            let input = UnsafeMutableAudioBufferListPointer(
+                UnsafeMutablePointer(mutating: inInputData)
+            )
+            let output = UnsafeMutableAudioBufferListPointer(outOutputData)
 
-        // If we have a specific output device, set it
-        if let outputUID = targetOutputDeviceUID,
-           let outputDeviceID = resolveDeviceID(forUID: outputUID) {
-            setEngineDevice(newEngine.outputNode, deviceID: outputDeviceID, isInput: false)
-        }
+            var peak: Float = 0.0
 
-        // Create gain/mixer node
-        let mixer = AVAudioMixerNode()
-        newEngine.attach(mixer)
+            for (index, outBuffer) in output.enumerated() {
+                guard let outData = outBuffer.mData else { continue }
+                let outSamples = outData.assumingMemoryBound(to: Float.self)
+                let outCount = Int(outBuffer.mDataByteSize) / MemoryLayout<Float>.size
 
-        // Get the input format from the aggregate device
-        let inputFormat = newEngine.inputNode.outputFormat(forBus: 0)
+                if index < input.count, let inData = input[index].mData {
+                    let inSamples = inData.assumingMemoryBound(to: Float.self)
+                    let inCount = Int(input[index].mDataByteSize) / MemoryLayout<Float>.size
+                    let count = min(outCount, inCount)
 
-        // Connect: input → mixer → output
-        // Use the input format to avoid sample rate conversion issues
-        let processingFormat = AVAudioFormat(
-            standardFormatWithSampleRate: inputFormat.sampleRate,
-            channels: min(inputFormat.channelCount, 2) // Stereo max
-        ) ?? inputFormat
-
-        newEngine.connect(newEngine.inputNode, to: mixer, format: processingFormat)
-        newEngine.connect(mixer, to: newEngine.mainMixerNode, format: processingFormat)
-
-        // Apply current gain
-        mixer.outputVolume = isMuted ? 0.0 : currentGain
-
-        // Install a tap on the mixer for level metering
-        if let onPeakLevelUpdate = onPeakLevelUpdate {
-            let meterFormat = mixer.outputFormat(forBus: 0)
-            if meterFormat.sampleRate > 0 && meterFormat.channelCount > 0 {
-                mixer.installTap(onBus: 0, bufferSize: 1024, format: meterFormat) { buffer, _ in
-                    let channelData = buffer.floatChannelData?[0]
-                    let frameLength = Int(buffer.frameLength)
-                    guard let data = channelData, frameLength > 0 else {
-                        onPeakLevelUpdate(0.0)
-                        return
+                    for i in 0..<count {
+                        let sample = inSamples[i] * gain
+                        outSamples[i] = sample
+                        let magnitude = abs(sample)
+                        if magnitude > peak { peak = magnitude }
                     }
-
-                    var peak: Float = 0.0
-                    for i in 0..<frameLength {
-                        let sample = abs(data[i])
-                        if sample > peak { peak = sample }
+                    // Zero any remaining output samples
+                    for i in count..<outCount {
+                        outSamples[i] = 0.0
                     }
-
-                    // Send peak level back (clamp to 0–1)
-                    onPeakLevelUpdate(min(peak, 1.0))
+                } else {
+                    // No matching input buffer: output silence
+                    for i in 0..<outCount {
+                        outSamples[i] = 0.0
+                    }
                 }
             }
+
+            levelCallback?(min(peak, 1.0))
         }
 
-        engine = newEngine
-        gainNode = mixer
-    }
-
-    /// Set the audio device for an AVAudioEngine node using Core Audio.
-    private func setEngineDevice(_ node: AVAudioNode, deviceID: AudioObjectID, isInput: Bool) {
-        // AVAudioEngine nodes wrap an AudioUnit internally.
-        // We need to set the kAudioOutputUnitProperty_CurrentDevice property.
-        guard let audioUnit = node.audioUnit else { return }
-
-        var devID = deviceID
-        AudioUnitSetProperty(
-            audioUnit,
-            kAudioOutputUnitProperty_CurrentDevice,
-            isInput ? kAudioUnitScope_Global : kAudioUnitScope_Global,
-            0,
-            &devID,
-            UInt32(MemoryLayout<AudioObjectID>.size)
-        )
-    }
-
-    /// Resolve a device UID to an AudioObjectID.
-    private func resolveDeviceID(forUID uid: String) -> AudioObjectID? {
-        var address = makePropertyAddress(
-            selector: kAudioHardwarePropertyDeviceForUID
-        )
-        
-        var cfuid: CFString = uid as CFString
-        var result: AudioObjectID? = nil
-        
-        withUnsafePointer(to: &cfuid) { uidPtr in
-            var translation = AudioValueTranslation(
-                mInputData: UnsafeMutableRawPointer(mutating: uidPtr),
-                mInputDataSize: UInt32(MemoryLayout<CFString>.size),
-                mOutputData: UnsafeMutableRawPointer.allocate(
-                    byteCount: MemoryLayout<AudioObjectID>.size,
-                    alignment: MemoryLayout<AudioObjectID>.alignment
-                ),
-                mOutputDataSize: UInt32(MemoryLayout<AudioObjectID>.size)
-            )
-            defer { translation.mOutputData.deallocate() }
-            
-            var size = UInt32(MemoryLayout<AudioValueTranslation>.size)
-            let status = AudioObjectGetPropertyData(
-                AudioObjectID(kAudioObjectSystemObject),
-                &address,
-                0,
-                nil,
-                &size,
-                &translation
-            )
-            
-            if status == noErr {
-                result = translation.mOutputData.load(as: AudioObjectID.self)
-            }
+        guard status == noErr, let procID else {
+            throw CoreAudioError.createAggregateFailed(status)
         }
-        
-        return result
+
+        let startStatus = AudioDeviceStart(aggregateDeviceID, procID)
+        guard startStatus == noErr else {
+            AudioDeviceDestroyIOProcID(aggregateDeviceID, procID)
+            throw CoreAudioError.createAggregateFailed(startStatus)
+        }
+
+        ioProcID = procID
+    }
+
+    // MARK: - Private: Device Lookup
+
+    /// Get the UID of the current system default output device.
+    private func defaultOutputDeviceUID() throws -> String {
+        let deviceID: AudioObjectID = try getAudioObjectProperty(
+            objectID: AudioObjectID(kAudioObjectSystemObject),
+            address: makePropertyAddress(selector: kAudioHardwarePropertyDefaultOutputDevice)
+        )
+        return try getAudioObjectPropertyString(
+            objectID: deviceID,
+            address: makePropertyAddress(selector: kAudioDevicePropertyDeviceUID)
+        )
     }
 }

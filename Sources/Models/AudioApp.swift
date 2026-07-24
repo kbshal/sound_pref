@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright © 2026 OpenSoundSource Contributors
+// Copyright © 2026 SoundPref Contributors
 
 import AppKit
 import CoreAudio
@@ -37,12 +37,10 @@ final class AudioApp: Identifiable, @unchecked Sendable {
 
     /// Volume level from 0.0 (silent) to 2.0 (200% boost).
     /// Values above 1.0 apply make-up gain.
-    var volume: Float = 1.0 {
-        didSet { volume = max(0.0, min(2.0, volume)) }
-    }
+    var volume: Float = 1.0
 
     /// Whether this app's audio is muted.
-    var isMuted: Bool = false
+    var isMuted: Bool = false 
 
     /// The UID of the output device this app should route to.
     /// `nil` means "follow the system default output."

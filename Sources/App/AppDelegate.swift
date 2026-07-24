@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright © 2026 OpenSoundSource Contributors
+// Copyright © 2026 SoundPref Contributors
 
 import AppKit
 import os.log
 
-private let logger = Logger(subsystem: "com.opensoundsource", category: "AppDelegate")
+private let logger = Logger(subsystem: "com.soundpref", category: "AppDelegate")
 
 /// Application delegate that initializes all subsystems and manages the app lifecycle.
 ///
-/// OpenSoundSource is an LSUIElement (no dock icon) — all interaction
+/// SoundPref is an LSUIElement (no dock icon) — all interaction
 /// happens through the menu bar icon and its popover panel.
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
@@ -33,7 +33,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - Lifecycle
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        logger.info("OpenSoundSource starting up...")
+        logger.info("SoundPref starting up...")
 
         // Initialize subsystems in dependency order
         deviceManager = AudioDeviceManager()
@@ -56,11 +56,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             menuBarController.showOnboarding()
         }
 
-        logger.info("OpenSoundSource ready. Found \(self.deviceManager.outputDevices.count) output devices, \(self.processDiscovery.activeApps.count) active audio apps.")
+        logger.info("SoundPref ready. Found \(self.deviceManager.outputDevices.count) output devices, \(self.processDiscovery.activeApps.count) active audio apps.")
     }
 
     func applicationWillTerminate(_ notification: Notification) {
-        logger.info("OpenSoundSource shutting down...")
+        logger.info("SoundPref shutting down...")
 
         // Stop all audio taps — this restores normal system audio
         audioRouter?.stopAllTaps()

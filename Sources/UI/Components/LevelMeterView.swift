@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright © 2026 OpenSoundSource Contributors
+// Copyright © 2026 SoundPref Contributors
 
 import SwiftUI
 
@@ -51,17 +51,4 @@ struct LevelMeterView: View {
             endPoint: .trailing
         )
     }
-}
-
-#Preview {
-    VStack(spacing: 12) {
-        LevelMeterView(level: 0.1)
-        LevelMeterView(level: 0.5)
-        LevelMeterView(level: 0.8)
-        LevelMeterView(level: 1.0)
-        LevelMeterView(level: 0.5, isActive: false)
-    }
-    .padding()
-    .frame(width: 200)
-    .background(.black)
 }

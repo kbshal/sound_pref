@@ -1,12 +1,10 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright © 2026 OpenSoundSource Contributors
+// Copyright © 2026 SoundPref Contributors
 
 import SwiftUI
 
 /// The main panel view displayed in the menu bar popover.
-///
-/// Layout mirrors SoundSource: device sections at top, followed by
-/// a scrollable list of per-app audio controls.
+/// Matches the `.panel` HTML mockup styling.
 struct MainPanelView: View {
     let deviceManager: AudioDeviceManager
     let processDiscovery: AudioProcessDiscovery
@@ -15,18 +13,15 @@ struct MainPanelView: View {
     @State private var searchText: String = ""
 
     var body: some View {
-        VStack(spacing: 0) {
-            // Header with app title
+        VStack(spacing: 16) {
+            // Header
             headerView
 
-            Divider()
-                .opacity(0.3)
-
             ScrollView(.vertical, showsIndicators: true) {
-                VStack(spacing: 2) {
-                    // Output Device Section
+                VStack(spacing: 16) {
+                    // System Output Section
                     DeviceSectionView(
-                        title: "Output",
+                        title: "System Output",
                         icon: "speaker.wave.2.fill",
                         device: deviceManager.defaultOutputDevice,
                         allDevices: deviceManager.outputDevices,
@@ -45,11 +40,9 @@ struct MainPanelView: View {
                         }
                     )
 
-                    thinDivider
-
                     // Input Device Section
                     DeviceSectionView(
-                        title: "Input",
+                        title: "System Input",
                         icon: "mic.fill",
                         device: deviceManager.defaultInputDevice,
                         allDevices: deviceManager.inputDevices,
@@ -58,180 +51,154 @@ struct MainPanelView: View {
                         }
                     )
 
-                    sectionDivider
-
-                    // Per-App Audio Controls
+                    // Applications Section
                     appListSection
                 }
             }
 
-            Divider()
-                .opacity(0.3)
-
             // Footer
             footerView
         }
-        .frame(width: 340)
-        .frame(maxHeight: 520)
-        .background(.ultraThinMaterial)
+        .padding(16)
+        .frame(width: 340) // Matched to HTML width
+        .frame(maxHeight: 680)
+        // Simulate glassmorphism
+        .background(
+            Color.black.opacity(0.3)
+                .background(.ultraThinMaterial)
+        )
     }
 
     // MARK: - Header
 
     private var headerView: some View {
         HStack {
-            Image(systemName: "waveform.circle.fill")
-                .font(.system(size: 16))
-                .foregroundStyle(.accentColor)
-
-            Text("OpenSoundSource")
-                .font(.system(size: 13, weight: .semibold))
+            Text("SoundPref")
+                .font(.system(size: 14, weight: .semibold))
+                .tracking(-0.3)
+                .foregroundStyle(.primary)
 
             Spacer()
-
-            // Engine toggle
+            
+            // Engine toggle / Status
             Button {
                 audioRouter.isEngineEnabled.toggle()
             } label: {
-                Image(systemName: audioRouter.isEngineEnabled ? "power.circle.fill" : "power.circle")
+                Image(systemName: audioRouter.isEngineEnabled ? "waveform" : "waveform.slash")
                     .font(.system(size: 14))
-                    .foregroundStyle(audioRouter.isEngineEnabled ? .green : .secondary)
+                    .foregroundStyle(audioRouter.isEngineEnabled ? Color.accentColor : Color.secondary)
             }
             .buttonStyle(.plain)
             .help(audioRouter.isEngineEnabled ? "Disable audio engine" : "Enable audio engine")
+
+            // Settings Button
+            Button {
+                SettingsWindowPresenter.shared.show()
+            } label: {
+                Image(systemName: "gear")
+                    .font(.system(size: 14))
+                    .foregroundStyle(.secondary)
+                    .padding(4)
+                    .background(
+                        RoundedRectangle(cornerRadius: 6)
+                            .fill(Color.white.opacity(0.001)) // clickable area
+                    )
+            }
+            .buttonStyle(.plain)
+            .help("Settings")
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 8)
     }
 
     // MARK: - App List
 
     private var appListSection: some View {
-        VStack(spacing: 2) {
-            // Section header
-            HStack {
-                Image(systemName: "app.dashed")
-                    .font(.system(size: 10, weight: .semibold))
-                    .foregroundStyle(.accentColor)
-                    .frame(width: 16)
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Applications")
+                .font(.system(size: 11, weight: .semibold))
+                .textCase(.uppercase)
+                .foregroundStyle(Color.secondary)
+                .tracking(0.5)
 
-                Text("Applications")
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(.secondary)
-                    .textCase(.uppercase)
-
-                Spacer()
-
-                Text("\(filteredApps.count)")
-                    .font(.system(size: 10, weight: .medium))
-                    .foregroundStyle(.tertiary)
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 1)
-                    .background(
-                        Capsule()
-                            .fill(Color.white.opacity(0.05))
-                    )
-            }
-            .padding(.horizontal, 10)
-            .padding(.vertical, 4)
-
-            if filteredApps.isEmpty {
-                emptyStateView
-            } else {
-                ForEach(filteredApps) { app in
-                    AppRowView(
-                        app: app,
-                        outputDevices: deviceManager.outputDevices,
-                        defaultOutputDevice: deviceManager.defaultOutputDevice,
-                        onVolumeChanged: { volume in
-                            audioRouter.setVolume(for: app, volume: volume)
-                        },
-                        onMuteToggled: { muted in
-                            audioRouter.setMuted(for: app, muted: muted)
-                        },
-                        onOutputDeviceChanged: { deviceUID in
-                            audioRouter.setOutputDevice(for: app, deviceUID: deviceUID)
-                        },
-                        onFavoriteToggled: {
-                            audioRouter.toggleFavorite(for: app)
+            VStack(spacing: 8) {
+                if filteredApps.isEmpty {
+                    emptyStateView
+                } else {
+                    ForEach(Array(filteredApps.enumerated()), id: \.element.id) { index, app in
+                        AppRowView(
+                            app: app,
+                            outputDevices: deviceManager.outputDevices,
+                            defaultOutputDevice: deviceManager.defaultOutputDevice,
+                            showLevelMeter: SettingsStore.shared.globalSettings.showLevelMeters,
+                            onVolumeChanged: { volume in
+                                audioRouter.setVolume(for: app, volume: volume)
+                            },
+                            onMuteToggled: { muted in
+                                audioRouter.setMuted(for: app, muted: muted)
+                            },
+                            onOutputDeviceChanged: { deviceUID in
+                                audioRouter.setOutputDevice(for: app, deviceUID: deviceUID)
+                            },
+                            onFavoriteToggled: {
+                                audioRouter.toggleFavorite(for: app)
+                            }
+                        )
+                        
+                        // Add divider between apps, but not after the last one
+                        if index < filteredApps.count - 1 {
+                            Divider()
+                                .opacity(0.2)
+                                .padding(.horizontal, 4)
                         }
-                    )
+                    }
                 }
             }
+            .padding(12)
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.black.opacity(0.2))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+            )
         }
     }
 
     private var emptyStateView: some View {
         VStack(spacing: 8) {
             Image(systemName: "speaker.zzz")
-                .font(.system(size: 24))
+                .font(.system(size: 20))
                 .foregroundStyle(.tertiary)
 
             Text("No apps producing audio")
-                .font(.system(size: 12))
+                .font(.system(size: 11))
                 .foregroundStyle(.secondary)
-
-            Text("Play something in any app and it will appear here.")
-                .font(.system(size: 10))
-                .foregroundStyle(.tertiary)
-                .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 24)
+        .padding(.vertical, 16)
     }
 
     // MARK: - Footer
 
     private var footerView: some View {
         HStack {
-            Button {
-                // Open about / settings
-                NSApp.orderFrontStandardAboutPanel()
-            } label: {
-                Image(systemName: "gear")
-                    .font(.system(size: 12))
-                    .foregroundStyle(.secondary)
-            }
-            .buttonStyle(.plain)
-
             Spacer()
-
-            Text("v0.1.0")
-                .font(.system(size: 9))
-                .foregroundStyle(.tertiary)
-
-            Spacer()
-
-            Button {
+            Button("Quit") {
                 NSApplication.shared.terminate(nil)
-            } label: {
-                Image(systemName: "xmark.circle")
-                    .font(.system(size: 12))
-                    .foregroundStyle(.secondary)
             }
             .buttonStyle(.plain)
-            .help("Quit OpenSoundSource")
+            .font(.system(size: 11))
+            .foregroundStyle(.secondary)
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 6)
     }
 
     // MARK: - Helpers
 
     private var filteredApps: [AudioApp] {
-        processDiscovery.allVisibleApps
-    }
-
-    private var thinDivider: some View {
-        Divider()
-            .opacity(0.15)
-            .padding(.horizontal, 10)
-    }
-
-    private var sectionDivider: some View {
-        Rectangle()
-            .fill(Color.white.opacity(0.05))
-            .frame(height: 1)
-            .padding(.vertical, 2)
+        let apps = processDiscovery.allVisibleApps
+        guard SettingsStore.shared.globalSettings.showFavorites else {
+            return apps.filter { $0.isRunningOutput }
+        }
+        return apps
     }
 }

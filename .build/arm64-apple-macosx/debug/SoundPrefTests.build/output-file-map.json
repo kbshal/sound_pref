@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/.build/arm64-apple-macosx/debug/SoundPrefTests.build/primary.swiftdeps"
+  },
+  "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/Tests/SettingsTests.swift": {
+    "dependencies": "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/.build/arm64-apple-macosx/debug/SoundPrefTests.build/SettingsTests.d",
+    "object": "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/.build/arm64-apple-macosx/debug/SoundPrefTests.build/SettingsTests.swift.o",
+    "swiftmodule": "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/.build/arm64-apple-macosx/debug/SoundPrefTests.build/SettingsTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/.build/arm64-apple-macosx/debug/SoundPrefTests.build/SettingsTests.swiftdeps",
+    "diagnostics": "/Users/kbshal/mero_space/projects/soundcore_alternative_open_ss/.build/arm64-apple-macosx/debug/SoundPrefTests.build/SettingsTests.dia"
+  }
+}

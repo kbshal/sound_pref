@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright © 2026 OpenSoundSource Contributors
+// Copyright © 2026 SoundPref Contributors
 
 import CoreAudio
 import Foundation
@@ -51,7 +51,7 @@ struct AudioDevice: Identifiable, Hashable, Sendable {
     var systemImageName: String {
         switch transportType {
         case kAudioDeviceTransportTypeBuiltIn:
-            return "laptopsound"
+            return "macbook"
         case kAudioDeviceTransportTypeUSB:
             return "cable.connector"
         case kAudioDeviceTransportTypeBluetooth, kAudioDeviceTransportTypeBluetoothLE:

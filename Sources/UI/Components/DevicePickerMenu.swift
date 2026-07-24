@@ -1,24 +1,18 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright © 2026 OpenSoundSource Contributors
+// Copyright © 2026 SoundPref Contributors
 
 import SwiftUI
 
-/// A compact dropdown menu for selecting an output device.
+/// A sleek dropdown menu for selecting an output device.
 ///
-/// Shows the currently selected device (or "System Default") and
-/// presents a menu of all available output devices.
+/// Matches the HTML mockup's dropdown style.
 struct DevicePickerMenu: View {
-    /// The currently selected device UID (nil = system default).
     @Binding var selectedDeviceUID: String?
-
-    /// All available output devices.
     let devices: [AudioDevice]
-
-    /// The system default device (for display when selection is nil).
     let defaultDevice: AudioDevice?
-
-    /// Callback when device selection changes.
     var onDeviceChanged: ((String?) -> Void)? = nil
+
+    @State private var isHovered: Bool = false
 
     var body: some View {
         Menu {
@@ -57,30 +51,38 @@ struct DevicePickerMenu: View {
                 }
             }
         } label: {
-            HStack(spacing: 3) {
-                Image(systemName: currentDeviceIcon)
-                    .font(.system(size: 10))
+            HStack {
+                Text(currentDeviceName)
+                    .font(.system(size: 11))
+                    .foregroundStyle(Color.primary)
+                    .lineLimit(1)
+                Spacer()
                 Image(systemName: "chevron.down")
-                    .font(.system(size: 7, weight: .bold))
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(Color.secondary)
             }
-            .foregroundStyle(selectedDeviceUID != nil ? Color.accentColor : Color.secondary)
-            .padding(.horizontal, 6)
-            .padding(.vertical, 3)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
             .background(
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(Color.white.opacity(0.05))
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(isHovered ? Color.white.opacity(0.1) : Color.white.opacity(0.05))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 6)
+                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
             )
         }
         .menuStyle(.borderlessButton)
-        .fixedSize()
+        .onHover { hovering in
+            isHovered = hovering
+        }
     }
 
-    /// Icon for the currently selected device.
-    private var currentDeviceIcon: String {
+    private var currentDeviceName: String {
         if let uid = selectedDeviceUID,
            let device = devices.first(where: { $0.uid == uid }) {
-            return device.systemImageName
+            return device.name
         }
-        return defaultDevice?.systemImageName ?? "speaker.wave.2"
+        return "System Default"
     }
 }

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright © 2026 OpenSoundSource Contributors
+// Copyright © 2026 SoundPref Contributors
 
 import AppKit
 import SwiftUI
@@ -9,7 +9,7 @@ import SwiftUI
 /// The controller owns the status bar item, handles click events,
 /// and presents/dismisses the popover containing `MainPanelView`.
 @MainActor
-final class MenuBarController {
+final class MenuBarController: NSObject {
 
     private var statusItem: NSStatusItem?
     private var popover: NSPopover?
@@ -38,7 +38,7 @@ final class MenuBarController {
         if let button = item.button {
             button.image = NSImage(
                 systemSymbolName: "waveform.circle.fill",
-                accessibilityDescription: "OpenSoundSource"
+                accessibilityDescription: "SoundPref"
             )
             button.image?.size = NSSize(width: 18, height: 18)
             button.image?.isTemplate = true
@@ -50,7 +50,7 @@ final class MenuBarController {
 
         // Create the popover
         let pop = NSPopover()
-        pop.contentSize = NSSize(width: 340, height: 480)
+        pop.contentSize = NSSize(width: 420, height: 620)
         pop.behavior = .transient
         pop.animates = true
 
@@ -78,7 +78,7 @@ final class MenuBarController {
         let hostingController = NSHostingController(rootView: onboardingView)
         let window = NSWindow(contentViewController: hostingController)
         window.styleMask = [.titled, .closable]
-        window.title = "Welcome to OpenSoundSource"
+        window.title = "Welcome to SoundPref"
         window.center()
         window.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
@@ -127,34 +127,9 @@ final class MenuBarController {
         let symbolName = isEngineActive ? "waveform.circle.fill" : "waveform.circle"
         button.image = NSImage(
             systemSymbolName: symbolName,
-            accessibilityDescription: "OpenSoundSource"
+            accessibilityDescription: "SoundPref"
         )
         button.image?.size = NSSize(width: 18, height: 18)
         button.image?.isTemplate = true
-    }
-}
-
-// Required for @objc selector on @MainActor class
-extension MenuBarController: NSObjectProtocol {
-    nonisolated func isEqual(_ object: Any?) -> Bool {
-        guard let other = object as? MenuBarController else { return false }
-        return self === other
-    }
-
-    nonisolated var hash: Int { ObjectIdentifier(self).hashValue }
-    nonisolated var superclass: AnyClass? { nil }
-    nonisolated var description: String { "MenuBarController" }
-    nonisolated var debugDescription: String { "MenuBarController" }
-
-    nonisolated func `self`() -> Self { self }
-    nonisolated func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! { nil }
-    nonisolated func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! { nil }
-    nonisolated func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! { nil }
-    nonisolated func isProxy() -> Bool { false }
-    nonisolated func isKind(of aClass: AnyClass) -> Bool { false }
-    nonisolated func isMember(of aClass: AnyClass) -> Bool { false }
-    nonisolated func conforms(to aProtocol: Protocol) -> Bool { false }
-    nonisolated func responds(to aSelector: Selector!) -> Bool {
-        aSelector == #selector(togglePopover(_:))
     }
 }
