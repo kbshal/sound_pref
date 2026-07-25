@@ -36,12 +36,7 @@ final class MenuBarController: NSObject {
         let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
         if let button = item.button {
-            button.image = NSImage(
-                systemSymbolName: "waveform.circle.fill",
-                accessibilityDescription: "SoundPref"
-            )
-            button.image?.size = NSSize(width: 18, height: 18)
-            button.image?.isTemplate = true
+            button.image = .soundPrefMark()
             button.action = #selector(togglePopover(_:))
             button.target = self
         }
@@ -121,15 +116,15 @@ final class MenuBarController: NSObject {
     }
 
     /// Update the menu bar icon based on engine state.
+    /// When active, the mark is tinted with the accent blue; otherwise it
+    /// stays as a standard template image (monochrome).
     func updateIcon(isEngineActive: Bool) {
         guard let button = statusItem?.button else { return }
 
-        let symbolName = isEngineActive ? "waveform.circle.fill" : "waveform.circle"
-        button.image = NSImage(
-            systemSymbolName: symbolName,
-            accessibilityDescription: "SoundPref"
-        )
-        button.image?.size = NSSize(width: 18, height: 18)
-        button.image?.isTemplate = true
+        if isEngineActive {
+            button.contentTintColor = NSColor(red: 0.404, green: 0.651, blue: 0.984, alpha: 1.0)  // #67A6FB
+        } else {
+            button.contentTintColor = nil  // revert to default template tinting
+        }
     }
 }

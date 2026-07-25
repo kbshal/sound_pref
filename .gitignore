@@ -3,4 +3,7 @@
 *.app/
 *.dmg
 dmg_staging/
+research/
+design_mockup.html
+SoundPref-Mark-1a/
 .DS_Store

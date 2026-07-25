@@ -73,6 +73,10 @@ struct MainPanelView: View {
 
     private var headerView: some View {
         HStack {
+            SoundPrefMark()
+                .frame(width: 16, height: 16)
+                .foregroundStyle(Color.accentColor)
+
             Text("SoundPref")
                 .font(.system(size: 14, weight: .semibold))
                 .tracking(-0.3)
