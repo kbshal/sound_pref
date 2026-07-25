@@ -10,6 +10,12 @@ It's a free alternative to [SoundSource](https://rogueamoeba.com/soundsource/), 
 ![Swift 6](https://img.shields.io/badge/Swift-6-orange)
 ![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-green)
 
+<p align="center">
+  <img src="assets/sound_pref_1.png" alt="SoundPref Panel" width="320" />
+  &nbsp;&nbsp;
+  <img src="assets/sound_pref_2.png" alt="SoundPref Menu Bar Icon" />
+</p>
+
 ## Features (MVP)
 
 - **Per-app volume control** — set independent volume (0–200%) for each running app
